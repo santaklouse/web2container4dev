@@ -1,37 +1,33 @@
-# Your project could have own hostname & database by edit lines marked with double sharp (##)
-
-# Shared volumes for mounting application source code
-data:
-  image: busybox
-  volumes:
-    - .:/data
-
-
-# Database with specific configurations (eg. no strict transactions)
-db:
-  image: aimakun/mysql
-  ports:
-    - "3306"
-  environment:
-    MYSQL_DATABASE: sitename_db ## <--- Edit here
-    MYSQL_ROOT_PASSWORD: root ## <--- Edit here
-    # MYSQL_USER: clientuser
-    # MYSQL_PASSWORD: clientpassword
-
-
-# Bundle all needed libraries here (eg. locales, phpunit, artisan commands, etc.)
-web:
-  image: aimakun/docker-laravel4-projects
-  ports:
-    - "80"
-  volumes_from:
-    - data
-  links:
-    - db
-  environment:
-    MYSQL_HOST: db
-    SITE_ENV: dev_docker
-    VIRTUAL_HOST: "test.dev" ## <--- Edit here
-  # Extra for wkhtmltopdf to access host itself
-  extra_hosts:
-    - "sitename.local:127.0.0.1" ## <--- Edit here
+version: '2'
+services:
+  data:
+    image: busybox
+    volumes:
+      - '.:/data'
+  db:
+    image: aimakun/mysql
+    ports:
+      - '3306'
+    environment:
+      MYSQL_DATABASE: 2web_web2container4dev_dev
+      MYSQL_ROOT_PASSWORD: root
+  web:
+    image: aimakun/docker-laravel4-projects
+    volumes_from:
+      - data
+    ports:
+      - '80'
+    links:
+      - db
+    environment:
+      MYSQL_HOST: db
+      SITE_ENV: dev_docker
+      VIRTUAL_HOST: web2container4dev.dev.local
+    extra_hosts:
+      - 'web2container4dev.dev.local:127.0.0.1'
+networks:
+  outside:
+    external: true
+volumes:
+  data:
+    external: true

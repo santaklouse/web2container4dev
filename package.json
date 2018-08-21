@@ -1,0 +1,29 @@
+{
+  "name": "web2container4dev",
+  "version": "0.0.1",
+  "description": "containerize web php projects; useful for development",
+  "main": "index.js",
+  "bin": {
+    "web2container4dev": "./bin/main.js"
+  },
+  "preferGlobal": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/santaklouse/web2container4dev.git"
+  },
+  "author": "Alex Nevpryaga <alexnevpryaga@gmail.com>",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/santaklouse/web2container4dev/issues"
+  },
+  "homepage": "https://github.com/santaklouse/web2container4dev#readme",
+  "dependencies": {
+    "composefile": "^0.3.0"
+  },
+  "devDependencies": {
+    "docker-compose": "^0.8.1"
+  }
+}
