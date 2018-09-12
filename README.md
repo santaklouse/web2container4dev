@@ -17,6 +17,14 @@ This template usually use for create development environment. We stil need some 
 
 ## Setup
 
+ - !!!`install this package GLOBALLY`!!!!, and after that move to project folder and run:
+ ```
+ web2container4dev -c run --params='{"public-dir": "/public","php":"7"}'
+ ```
+----------------------||
+----------------------||
+------------------OLD README BELOV
+
 - Clone this repository and rename root directory with your own one.
 - Copy your app bootstrap code in `public` directory, eg. `public/index.php`. (You can replace hello world index.php)
 - Other included / required files or libraries can store anywhere within project directory.
