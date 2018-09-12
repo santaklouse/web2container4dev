@@ -23,7 +23,7 @@ This template usually use for create development environment. We stil need some 
  ```
 ----------------------||
 ----------------------||
-------------------OLD README BELOV
+------------------OLD README BELOW
 
 - Clone this repository and rename root directory with your own one.
 - Copy your app bootstrap code in `public` directory, eg. `public/index.php`. (You can replace hello world index.php)
