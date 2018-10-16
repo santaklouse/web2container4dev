@@ -11,6 +11,8 @@ WORKDIR /data
 
 COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 
+RUN sed -i -e 's/${PUBLIC_DIR}/$PUBLIC_DIR/g' /etc/apache2/sites-available/000-default.conf
+
 RUN chown -R www-data:www-data /data \
     && a2enmod rewrite
 
