@@ -47,7 +47,7 @@ let options = {
         dockerfile: "Dockerfile-php7.2",
         volumes_from: ['data'],
         ports: [ '80' ],
-        links: ['db'],
+        links: ['db', 'redis'],
         environment: {
             MYSQL_HOST: 'db',
             SITE_ENV: 'dev_docker',
@@ -55,7 +55,17 @@ let options = {
             PUBLIC_DIR: '/public'
         },
         extra_hosts: [`${serverDNSName}:127.0.0.2`] //edit
+    },
+    redis: {
+        container_name: "redis",
+        image: "redis",
+        ports:
+            ["6379:6379"],
+        volumes:
+            ["/sessions"],
+        restart: "always"
     }
+
 };
 const buildConfig = function(callback, opt) {
     console.log('creating config for:', serverDNSName);
@@ -120,10 +130,11 @@ module.exports = (function() {
 
 
             console.log('checking ip addr....');
-            // (ifconfig | fgrep 127.0.0.2 > /dev/null) || sudo ifconfig lo0 alias 127.0.0.2 up
-
+            child_process.execSync('(ifconfig | fgrep 127.0.0.2 > /dev/null) || sudo ifconfig lo0 alias 127.0.0.2 up', {stdio:[0,1,2]});
 
             console.log('checking http/s proxy....');
+
+
             child_process.execSync(`docker stop auto-proxy ; docker rm auto-proxy ; docker run -d -p 127.0.0.2:80:80 -p 127.0.0.2:443:443 -v /var/run/docker.sock:/var/run/docker.sock:ro --name auto-proxy --restart always ayufan/auto-proxy`, {stdio:[0,1,2]});
 
             console.log('...requres root in order to modify hosts file!');
