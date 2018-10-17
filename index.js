@@ -47,9 +47,12 @@ let options = {
         dockerfile: "Dockerfile-php7.2",
         volumes_from: ['data'],
         ports: [ '80' ],
-        links: ['db', 'redis', 'elasticsearch'],
-        volumes:
-            ["/sessions"],
+        links: [
+            'db',
+            'redis',
+            'elasticsearch',
+            'memcached'
+        ],
         environment: {
             MYSQL_HOST: 'db',
             SITE_ENV: 'dev_docker',
@@ -62,17 +65,17 @@ let options = {
         image: "redis",
         ports:
             ["6379:6379"],
-        volumes:
-            ["/sessions"],
-        restart: "always"
     },
     elasticsearch: {
         image: 'elasticsearch:6.4.0',
-        ports: [ '9200:9200', '9300:9300' ],
-        volumes:
-            ["/sessions"],
-        restart: "always"
+        ports:
+            ['9200:9200', '9300:9300']
+    },
+    memcached: {
+        image: 'memcached',
+        ports: ["11211:11211"]
     }
+
 
 
 };
