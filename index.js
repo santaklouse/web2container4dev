@@ -48,6 +48,8 @@ let options = {
         volumes_from: ['data'],
         ports: [ '80' ],
         links: ['db', 'redis', 'elasticsearch'],
+        volumes:
+            ["/sessions"],
         environment: {
             MYSQL_HOST: 'db',
             SITE_ENV: 'dev_docker',
