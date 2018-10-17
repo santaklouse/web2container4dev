@@ -65,7 +65,7 @@ let options = {
         restart: "always"
     },
     elasticsearch: {
-        image: 'elasticsearch',
+        image: 'elasticsearch:6.4.0',
         ports: [ '9200:9200', '9300:9300' ],
         volumes:
             ["/sessions"],
