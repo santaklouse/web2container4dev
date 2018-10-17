@@ -59,12 +59,14 @@ let options = {
             VIRTUAL_HOST: serverDNSName,
             PUBLIC_DIR: '/public'
         },
+        volumes: ['/sessions'],
         extra_hosts: [`${serverDNSName}:127.0.0.2`] //edit
     },
     redis: {
         image: "redis",
         ports:
             ["6379:6379"],
+        volumes: ['/sessions'],
     },
     elasticsearch: {
         image: 'elasticsearch:6.4.0',
