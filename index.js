@@ -44,7 +44,7 @@ let options = {
     },
     web: {
         build: __dirname,
-        dockerfile: "Dockerfile-php7.2",
+        dockerfile: "Dockerfile-php5.6",
         volumes_from: ['data'],
         ports: [ '80' ],
         links: [
