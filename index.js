@@ -47,7 +47,7 @@ let options = {
         dockerfile: "Dockerfile-php7.2",
         volumes_from: ['data'],
         ports: [ '80' ],
-        links: ['db', 'redis'],
+        links: ['db', 'redis', 'elasticsearch'],
         environment: {
             MYSQL_HOST: 'db',
             SITE_ENV: 'dev_docker',
@@ -57,14 +57,18 @@ let options = {
         extra_hosts: [`${serverDNSName}:127.0.0.2`] //edit
     },
     redis: {
-        container_name: "redis",
         image: "redis",
         ports:
             ["6379:6379"],
         volumes:
             ["/sessions"],
         restart: "always"
+    },
+    elasticsearch: {
+        image: 'elasticsearch:latest',
+        ports: [ '9200:9200', '9300:9300' ],
     }
+
 
 };
 const buildConfig = function(callback, opt) {
