@@ -1,7 +1,7 @@
 FROM php:7.2-apache
 
 RUN apt-get update -y
-RUN apt-get install -y libxml2-dev libmemcached-dev
+RUN apt-get install -y zlib1g-dev libxml2-dev libmemcached-dev
 
 RUN pecl install memcached
 RUN docker-php-ext-enable memcached
