@@ -1,13 +1,12 @@
 FROM php:7.2-apache
 
-RUN apt-get update -y \
-  && apt-get install -y \
-    libxml2-dev \
-    libmemcached-dev \
-    	&& pecl install memcached \
-    	&& docker-php-ext-enable memcached
-  && apt-get clean -y \
-  && docker-php-ext-install pdo pdo_mysql mysqli soap
+RUN apt-get update -y
+RUN apt-get install -y libxml2-dev libmemcached-dev
+
+RUN pecl install memcached
+RUN docker-php-ext-enable memcached
+RUN apt-get clean -y
+RUN docker-php-ext-install pdo pdo_mysql mysqli soap
 
 RUN echo ''|pecl install -o -f redis \
 &&  rm -rf /tmp/pear \

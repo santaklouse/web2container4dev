@@ -57,6 +57,7 @@ let options = {
             MYSQL_HOST: 'db',
             SITE_ENV: 'dev_docker',
             VIRTUAL_HOST: serverDNSName,
+            ENABLE_HTTP: 1,
             PUBLIC_DIR: '/public'
         },
         volumes: ['/sessions'],
