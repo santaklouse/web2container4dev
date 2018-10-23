@@ -77,10 +77,27 @@ let options = {
     memcached: {
         image: 'memcached',
         ports: ["11211:11211"]
+    },
+    cassandra: {
+        image: 'cassandra',
+        command: 'bash -c \'if [ -z "$$(ls -A /var/lib/cassandra/)" ] ; then sleep 0; fi && /docker-entrypoint.sh cassandra -f\'',
+        environment: {
+            'CASSANDRA_CLUSTER_NAME': 'dev_cluster'
+        },
+        ulimits: '',
+        memlock: -1,
+        nproc: 32768,
+        nofile: 100000,
+        volumes: [
+            './cassandra_data:/var/lib/cassandra'
+        ],
+        ports: [
+            '7000',
+            '7001',
+            '9042',
+            '9160'
+        ]
     }
-
-
-
 };
 const buildConfig = function(callback, opt) {
     console.log('creating config for:', serverDNSName);
@@ -90,7 +107,7 @@ const buildConfig = function(callback, opt) {
         let pd = (opt || callback)['public-dir'];
         let phpVers = (opt || callback)['php'];
         phpVers = phpVers === "5" ? "5.6" :
-            phpVers === "7" ? "7.2" : "7.2";
+            phpVers === "7" ? "7.0" : "7.0";
         options.web.environment.PUBLIC_DIR = pd ? pd : options.web.environment.PUBLIC_DIR;
         options.web.dockerfile = `Dockerfile-php${phpVers}`;
     }
