@@ -1,6 +1,6 @@
 {
   "name": "web2container4dev",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "containerize web php projects; useful for development",
   "main": "index.js",
   "bin": {
