@@ -1,7 +1,7 @@
 FROM php:7.0-apache
 
 RUN apt-get update -y
-RUN apt-get install -y zlib1g-dev libxml2-dev libmemcached-dev
+RUN apt-get install -y wget zlib1g-dev libxml2-dev libmemcached-dev
 
 RUN pecl install memcached
 RUN docker-php-ext-enable memcached
@@ -11,7 +11,6 @@ RUN docker-php-ext-install pdo pdo_mysql mysqli soap
 RUN echo ''|pecl install -o -f redis \
 &&  rm -rf /tmp/pear \
 &&  docker-php-ext-enable redis
-
 
 RUN cd /root \
     && wget http://downloads.datastax.com/cpp-driver/ubuntu/16.04/dependencies/libuv/v1.11.0/libuv_1.11.0-1_amd64.deb \
@@ -24,7 +23,7 @@ RUN cd /root \
     && dpkg -i libssl1.0.0_1.0.1t-1+deb8u9_amd64.deb \
     && dpkg -i cassandra-cpp-driver_2.8.0-1_amd64.deb \
     && dpkg -i cassandra-cpp-driver-dev_2.8.0-1_amd64.deb \
-    && apt-get install libgmp-dev \
+    && apt-get install -y libgmp-dev \
     && pecl install cassandra \
     && echo "extension=cassandra.so" >> /etc/php/7.0/apache2/php.ini \
     && echo "extension=cassandra.so" >> /etc/php/7.0/cli/php.ini
