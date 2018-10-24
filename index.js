@@ -51,7 +51,8 @@ let options = {
             'db',
             'redis',
             'elasticsearch',
-            'memcached'
+            'memcached',
+            'cassandra'
         ],
         environment: {
             MYSQL_HOST: 'db',
@@ -84,10 +85,6 @@ let options = {
         environment: {
             'CASSANDRA_CLUSTER_NAME': 'dev_cluster'
         },
-        ulimits: '',
-        memlock: -1,
-        nproc: 32768,
-        nofile: 100000,
         volumes: [
             './cassandra_data:/var/lib/cassandra'
         ],
